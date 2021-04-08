@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 
-from blog.models import Blog
+from blog.models import Blog, Author
 
 
 def index(request):
@@ -23,3 +23,20 @@ class BlogDetailView(generic.DetailView):
     model = Blog
     template_name = "blog/blog.html"
     context_object_name = 'blog'
+
+
+class AuthorListView(generic.ListView):
+    model = Author
+    template_name = 'blog/authors.html'
+    context_object_name = 'authors'
+
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
+    template_name = 'blog/author.html'
+    context_object_name = 'author'
+
+    def get_context_data(self, **kwargs):
+        context = super(AuthorDetailView, self).get_context_data(**kwargs)
+        context['author_blogs'] = Blog.objects.all()
+        return context
