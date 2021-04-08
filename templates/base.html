@@ -14,6 +14,9 @@
         a {
             text-decoration: none;
         }
+        body{
+    font-size:18px;
+}
         {% block style %}{% endblock %}</style>
 </head>
 <body>
@@ -29,9 +32,6 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -63,15 +63,14 @@
                 <thead>
                 </thead>
                 <tbody>
-                <td>Books</td>
                 <tr>
-                    <td><a href="#">Home</a></td>
+                    <td><a href="{% url 'index' %}">Home</a></td>
                 </tr>
                 <tr>
-                    <td><a href="#">All books</a></td>
+                    <td><a href="{% url 'blogs' %}">Browse articles</a></td>
                 </tr>
                 <tr>
-                    <td><a href="#">All authors</a></td>
+                    <td><a href="{% url 'authors' %}">See authors</a></td>
                 </tr>
                 </tbody>
             </table>
@@ -83,6 +82,16 @@
         </div>
     </div>
 </div>
+
+<br><br><br>
+<footer>
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2020 Copyright:
+        <a class="text-dark" href="https://library14app.heroku.com">librarymanagement.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
