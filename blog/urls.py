@@ -13,4 +13,6 @@ urlpatterns = [
     path('create/author/', views.AuthorCreate.as_view(), name="create-author"),
 
     path('comment/<int:pk>', views.comment, name="comment"),
+
+    path('signup/', views.signup, name="signup"),
 ]

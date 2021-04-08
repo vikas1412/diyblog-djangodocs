@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as login_auth, logout as logout_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -6,6 +8,7 @@ from django.urls import reverse
 from django.views import generic
 from django.views.generic import CreateView
 
+from blog.forms import SignUpForm
 from blog.models import Blog, Author, Comment
 
 
@@ -70,4 +73,24 @@ class AuthorCreate(CreateView):
     fields = ['first_name', 'last_name', 'bio', 'date_of_birth']
     template_name = 'blog/author_form.html'
     initial = {'date_of_birth': '01/01/1990'}
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password1 = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password1)
+            if user is not None:
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                return redirect('index')
+            else:
+                return HttpResponse("Invalid username & password")
+
+    else:
+        form = SignUpForm()
+    return render(request, 'registration/signup.html', {'form': form})
+
 
