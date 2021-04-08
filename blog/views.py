@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import generic
+from django.views.generic import CreateView
 
 from blog.models import Blog, Author, Comment
 
@@ -59,3 +60,10 @@ def comment(request, pk=None):
         comment_obj = Comment(comment=user_comment, username=request.user, blog=blog_instance)
         comment_obj.save()
     return redirect(f'blog/{pk}/')
+
+
+class AuthorCreate(CreateView):
+    model = Author
+    fields = ['first_name', 'last_name', 'bio', 'date_of_birth']
+    template_name = 'blog/author_form.html'
+    initial = {'date_of_birth': '01/01/1990'}

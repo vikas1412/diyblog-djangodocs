@@ -50,7 +50,7 @@
                         {% else %}
                             <li><a class="dropdown-item" href="#">Profile</a></li>
                             {% if user.is_staff %}
-                                <li><a class="dropdown-item" href="#">Create post</a></li>
+                                <li><a class="dropdown-item" href="{% url 'create-author' %}">Create author</a></li>
                             {% endif %}
                             <li>
                                 <hr class="dropdown-divider">

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}New author - TimeBlog{% endblock %}
+
+{% block style %}
+    input{
+    border:1px solid green;
+    padding:1%;
+    padding-left:12px;
+    font-size:17px
+    }
+    .errorlist{
+    color:red;
+    }
+
+{% endblock %}
+{% block body %}
+
+    <h5 class="vLargeTextField">Create a new author at TimeBlog
+    </h5>
+    <hr>
+    <div class="mt-3"></div>
+
+    <form action="#" method="post">
+        {% csrf_token %}
+        <ul class="list-group list-group-flush">
+            {{ form.as_table }}
+            <input type="submit" value="Create new author👶" class="btn btn-primary mt-1">
+        </ul>
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}
