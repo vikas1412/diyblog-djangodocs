@@ -49,6 +49,9 @@
                             <li><a class="dropdown-item" href="#">Signup</a></li>
                         {% else %}
                             <li><a class="dropdown-item" href="#">Profile</a></li>
+                            {% if user.is_staff %}
+                                <li><a class="dropdown-item" href="#">Create post</a></li>
+                            {% endif %}
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

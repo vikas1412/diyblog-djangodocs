@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 
-from blog.models import Blog, Author
+from blog.models import Blog, Author, Comment
 
 
 def index(request):
@@ -24,6 +26,12 @@ class BlogDetailView(generic.DetailView):
     template_name = "blog/blog.html"
     context_object_name = 'blog'
 
+    def get_context_data(self, **kwargs):
+        context = super(BlogDetailView, self).get_context_data(**kwargs)
+        blog_obj = self.kwargs['pk']
+        context['comments'] = Comment.objects.order_by('-timestamp')
+        return context
+
 
 class AuthorListView(generic.ListView):
     model = Author
@@ -40,3 +48,14 @@ class AuthorDetailView(generic.DetailView):
         context = super(AuthorDetailView, self).get_context_data(**kwargs)
         context['author_blogs'] = Blog.objects.all()
         return context
+
+
+@login_required
+def comment(request, pk=None):
+    if request.method == 'POST':
+        user_comment = request.POST['comment']
+        user = request.user.username
+        blog_instance = Blog.objects.get(id=pk)
+        comment_obj = Comment(comment=user_comment, username=request.user, blog=blog_instance)
+        comment_obj.save()
+    return redirect(f'blog/{pk}/')

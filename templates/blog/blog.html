@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
 {% block body %}
 
     <h5 class="vLargeTextField">{{ blog.title }}
@@ -13,21 +15,34 @@
         </li>
     </ul>
     <hr>
-    <h5>Comments:</h5>
     <p>
         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
            aria-controls="collapseExample">
-            Comment
+            Comment 🥳
         </a>
     </p>
     <div class="collapse" id="collapseExample">
-        <div class="card card-body p-2">
+        <div class="card card-body p-2" style="border: 0px">
             <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Comment</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                <input type="submit" value="Comment" class="btn btn-success mt-1 p-1">
+                <form method="post" action="{% url 'comment' blog.pk %}">
+                    {% csrf_token %}
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea class="form-control" name="comment" id="comment" rows="2"></textarea>
+                    <input type="submit" value="Comment" class="btn btn-success mt-1 p-1">
+                </form>
             </div>
         </div>
     </div>
 
+    <h5 style="color: orange">{{ comments|length }} Comments- </h5>
+    <div class="mt-5">
+
+        {% for comment in comments %}
+            <span style="padding: 1%; color: blue; border: 1px solid gray">{{ comment.username }}</span> <br>
+            <p>{{ comment }}</p>
+            <span style="font-size:13px; color: darkgrey; float:right">{{ comment.timestamp|naturaltime }}</span>
+            <br>
+            <hr>
+        {% endfor %}
+    </div>
 {% endblock %}
