@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Welcome to TimeBlog.</h1>
+
+<ul class="list-group list-group-flush">
+    {{ blogs }}
+    {% for blog in blogs %}
+    <li class="list-group-item">An item</li>
+    {% endfor %}
+
+</ul>
+
+{% endblock %}
