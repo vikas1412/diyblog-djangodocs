@@ -21,6 +21,7 @@ class BlogListView(generic.ListView):
     model = Blog
     template_name = 'blog/blogs.html'
     context_object_name = 'blogs'
+    paginate_by = 8
 
 
 class BlogDetailView(generic.DetailView):
@@ -39,6 +40,7 @@ class AuthorListView(generic.ListView):
     model = Author
     template_name = 'blog/authors.html'
     context_object_name = 'authors'
+    paginate_by = 8
 
 
 class AuthorDetailView(generic.DetailView):
@@ -68,3 +70,4 @@ class AuthorCreate(CreateView):
     fields = ['first_name', 'last_name', 'bio', 'date_of_birth']
     template_name = 'blog/author_form.html'
     initial = {'date_of_birth': '01/01/1990'}
+
