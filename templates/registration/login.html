@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - TimeBlog{% endblock %}
+
+{% block style %}
+    input{
+    border:1px solid green;
+    padding:1%;
+    padding-left:12px;
+    font-size:17px
+    }
+    .errorlist{
+    color:red;
+    }
+
+{% endblock %}
+{% block body %}
+
+    <h5 class="vLargeTextField">Login to TimeBlog
+    </h5>
+    <hr>
+    <div class="mt-3"></div>
+    {% if not user.is_authenticated %}
+        <form method="post" action="#">
+            {% csrf_token %}
+            <ul class="list-group list-group-flush">
+
+                {{ form.as_table }}
+                <input type="submit" value="Login" class="btn btn-primary mt-1">
+                <a href="{% url 'password_reset' %}">Forgot password?</a>
+
+            </ul>
+        </form>
+    {% else %}
+        <p>You are already logged in to your account. If you want to logout of current account, please <a
+                href="{% url 'logout' %}">logout here</a>.</p>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}
