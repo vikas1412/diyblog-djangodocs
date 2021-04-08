@@ -9,7 +9,7 @@
     <ul class="list-group list-group-flush">
         {% for blog in blogs %}
             <li class="p-2 list-group-item">
-                <a href="{% url 'post' blog.pk %}"> {{ blog.title }}</a>
+                <a href="{% url 'blog' blog.pk %}"> {{ blog.title }}</a>
             <a href="#" style="font-size: 15px; float:right"><span style="color: gray">By:</span> Vikas</a>
             </li>
 

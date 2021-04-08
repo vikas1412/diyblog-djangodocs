@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <h5 class="vLargeTextField">{{ blog.title }}
+    <a href="#" style="font-size: 15px; float:right"><span style="color: gray">By:</span> Vikas</a>
+    </h5>
+    <hr>
+    <div class="mt-3"></div>
+    <ul class="list-group list-group-flush">
+        <li class="p-2 list-group-item">
+            <p>{{ blog.content|linebreaks }}</p>
+        </li>
+    </ul>
+
+{% endblock %}
