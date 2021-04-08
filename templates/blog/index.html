@@ -3,12 +3,21 @@
 {% block body %}
 <h1>Welcome to TimeBlog.</h1>
 
-<ul class="list-group list-group-flush">
-    {{ blogs }}
-    {% for blog in blogs %}
-    <li class="list-group-item">An item</li>
-    {% endfor %}
 
-</ul>
+    <ol class="list-group list-group-numbered">
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold"><a href="{% url 'blogs' %}">Total blog posts</a></div>
+            </div>
+            <span class="badge bg-primary rounded-pill">{{ blogs }} posts</span>
+        </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Total Bloggers</div>
+            </div>
+            <span class="badge bg-primary rounded-pill">5 bloggers</span>
+        </li>
+    </ol>
+
 
 {% endblock %}

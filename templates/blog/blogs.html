@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>Welcome to TimeBlog.</h1>
+
+    <p class="vLargeTextField">These are all blog posts created till date.</p>
+    <hr>
+    <div class="mt-5"></div>
+    <ul class="list-group list-group-flush">
+        {% for blog in blogs %}
+            <li class="p-2 list-group-item">
+                <a href="{% url 'post' blog.pk %}"> {{ blog.title }}</a>
+            <a href="#" style="font-size: 15px; float:right"><span style="color: gray">By:</span> Vikas</a>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+{% endblock %}

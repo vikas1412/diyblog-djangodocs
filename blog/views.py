@@ -2,6 +2,18 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 
+from blog.models import Blog
+
 
 def index(request):
-    return render(request, 'blog/index.html')
+    blogs = Blog.objects.count()
+    params = {
+        'blogs': blogs,
+    }
+    return render(request, 'blog/index.html', params)
+
+
+class BlogListView(generic.ListView):
+    model = Blog
+    template_name = 'blog/blogs.html'
+    context_object_name = 'blogs'
