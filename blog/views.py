@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import generic
 from django.views.generic import CreateView
 
@@ -59,7 +60,7 @@ def comment(request, pk=None):
         blog_instance = Blog.objects.get(id=pk)
         comment_obj = Comment(comment=user_comment, username=request.user, blog=blog_instance)
         comment_obj.save()
-    return redirect(f'blog/{pk}/')
+    return redirect(reverse('blog', kwargs={"pk": pk}))
 
 
 class AuthorCreate(CreateView):
