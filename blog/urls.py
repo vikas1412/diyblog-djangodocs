@@ -17,4 +17,6 @@ urlpatterns = [
     path('comment/<int:pk>', views.comment, name="comment"),
 
     path('signup/', views.signup, name="signup"),
+
+    path('<int:pk>/update/', views.UpdatePostUpdateView.as_view(), name="update-post"),
 ]

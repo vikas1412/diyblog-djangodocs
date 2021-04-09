@@ -99,3 +99,10 @@ class CommentDeleteView(generic.DetailView):
     template_name = 'blog/comment_confirm_delete.html'
     context_object_name = 'delete_blog'
     success_url = reverse_lazy('index')
+
+
+class UpdatePostUpdateView(generic.UpdateView):
+    model = Blog
+    template_name = 'blog/update_post_form.html'
+
+    fields = ['title', 'content']
