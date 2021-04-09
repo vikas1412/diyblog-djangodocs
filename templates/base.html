@@ -49,8 +49,10 @@
                             <li><a class="dropdown-item" href="{% url 'signup' %}">Signup</a></li>
                         {% else %}
                             <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Create post</a></li>
                             {% if user.is_staff %}
                                 <li><a class="dropdown-item" href="{% url 'create-author' %}">Create author</a></li>
+                                <li><a class="dropdown-item" href="#">Register user</a></li>
                             {% endif %}
                             <li>
                                 <hr class="dropdown-divider">
