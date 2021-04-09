@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView
 
@@ -94,3 +94,8 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
+class CommentDeleteView(generic.DetailView):
+    model = Comment
+    template_name = 'blog/comment_confirm_delete.html'
+    context_object_name = 'delete_blog'
+    success_url = reverse_lazy('index')
