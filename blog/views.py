@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import authenticate, login as login_auth, logout as logout_auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -68,7 +69,7 @@ def comment(request, pk=None):
     return redirect(reverse('blog', kwargs={"pk": pk}))
 
 
-class AuthorCreate(CreateView):
+class AuthorCreate(LoginRequiredMixin, generic.CreateView):
     model = Author
     fields = ['first_name', 'last_name', 'bio', 'date_of_birth']
     template_name = 'blog/author_form.html'
@@ -94,21 +95,21 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
-class CommentDeleteView(generic.DetailView):
+class CommentDeleteView(LoginRequiredMixin, generic.DetailView):
     model = Comment
     template_name = 'blog/comment_confirm_delete.html'
     context_object_name = 'delete_blog'
     success_url = reverse_lazy('index')
 
 
-class UpdateCommentUpdateView(generic.UpdateView):
+class UpdateCommentUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Comment
     template_name = 'blog/update_comment_form.html'
 
     fields = ['comment']
 
 
-class UpdatePostUpdateView(generic.UpdateView):
+class UpdatePostUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Blog
     template_name = 'blog/update_post_form.html'
 
