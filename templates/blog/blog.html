@@ -14,9 +14,12 @@
     <ul class="list-group list-group-flush">
         <li class="p-2 list-group-item">
             <p>{{ blog.content|linebreaks }}</p>
+    {{ blog.author }}: : {{ request.user }}sdf
         </li>
     </ul>
+    {% if blog.author == request.user %}
     <a href="{% url 'update-post' blog.pk %}" style="float: right">Update post</a>
+    {% endif %}
     <hr>
     <p>
         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
