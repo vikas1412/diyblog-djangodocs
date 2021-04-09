@@ -16,6 +16,7 @@
             <p>{{ blog.content|linebreaks }}</p>
         </li>
     </ul>
+    <a href="{% url 'update-post' blog.pk %}" style="float: right">Update post</a>
     <hr>
     <p>
         <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
