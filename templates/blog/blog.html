@@ -51,6 +51,7 @@
             </button>
                     <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{% url 'delete-comment' comment.pk %}">Delete</a></li>
+                <li><a class="dropdown-item" href="{% url 'update-comment' comment.pk %}">Update Comment</a></li>
             </ul>
                 {% endif %}
             </span>
