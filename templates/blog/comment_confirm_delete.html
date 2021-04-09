@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Password reset - TimeBlog{% endblock %}
+
+{% block style %}
+    input{
+    border:1px solid green;
+    padding:1%;
+    padding-left:12px;
+    font-size:17px
+    }
+    .errorlist{
+    color:red;
+    }
+
+{% endblock %}
+{% block body %}
+
+    <h5 class="vLargeTextField">Delete your comment?
+    </h5>
+    <hr>
+    <div class="mt-3"></div>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <ul class="list-group list-group-flush">
+            Are your sure you want to delete your comment
+            <span style="font-size: 14px"> '{{ delete_blog }}'?</span>
+        </ul>
+        <input type="submit" value="Delete">
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}
