@@ -119,7 +119,8 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
-class CommentDeleteView(LoginRequiredMixin, generic.DetailView):
+class CommentDeleteView(LoginRequiredMixin, generic.DeleteView):
+    success_message = "Deleted Successfully"
     model = Comment
     template_name = 'blog/comment_confirm_delete.html'
     context_object_name = 'delete_blog'
@@ -138,3 +139,11 @@ class UpdatePostUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = 'blog/update_post_form.html'
 
     fields = ['title', 'content']
+
+
+def handler404(request, exception):
+    return render(request, 'blog/pnf.html', {'exception': exception})
+
+
+def handler505(request, exception):
+    return render(request, 'blog/pnf.html', {'exception': exception})
