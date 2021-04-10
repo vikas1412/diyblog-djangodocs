@@ -5,7 +5,8 @@ from django.utils import timezone
 
 
 class Blog(models.Model):
-    author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=200)
     content = models.TextField(max_length=10000)
     timestamp = models.DateTimeField(auto_now_add=True, blank=True,)
@@ -22,6 +23,7 @@ class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     bio = models.TextField(max_length=10000, blank=True)
+    username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     date_of_birth = models.DateField(null=True, blank=True, default='1998-10-12')
 
     def __str__(self):
