@@ -11,15 +11,15 @@ urlpatterns = [
 
     path('new/', views.NewBlogCreateView.as_view(), name="new-blog"),
 
-    path('<int:pk>/comment/delete/', views.CommentDeleteView.as_view(), name='delete-comment'),
-    path('<int:pk>/comment_upate/', views.UpdateCommentUpdateView.as_view(), name='update-comment'),
+    path('comments/<int:pk>/deleted/', views.CommentDeleteView.as_view(), name='delete-comment'),
+    path('comments/<int:pk>/edit/', views.UpdateCommentUpdateView.as_view(), name='update-comment'),
 
     path('authors/', views.AuthorListView.as_view(), name="authors"),
     path('author/<int:pk>', views.AuthorDetailView.as_view(), name="author"),
 
     path('create/author/', views.AuthorCreate.as_view(), name="create-author"),
 
-    path('comment/<int:pk>', views.comment, name="comment"),
+    path('comments/<int:pk>', views.comment, name="comment"),
 
     path('signup/', views.signup, name="signup"),
 
