@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Password reset - TimeBlog{% endblock %}
+
+{% block style %}
+    input{
+    border:1px solid green;
+    padding:1%;
+    padding-left:12px;
+    font-size:17px
+    }
+    .errorlist{
+    color:red;
+    }
+
+{% endblock %}
+{% block body %}
+
+    <h5 class="vLargeTextField">Page not found
+    </h5>
+    <hr>
+    <div class="mt-3"></div>
+
+    <ul class="list-group list-group-flush">
+        The page you requested was either deleted or not found.
+        <p><strong>Exception type: </strong>{{ exception }}</p>
+        Go to <a href="{% url 'index' %}">homepage</a> to continue.
+    </ul>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}
