@@ -2,7 +2,7 @@ from django.urls import path, include
 from blog import views
 
 handler404 = 'blog.views.handler404'
-handler500 = 'blog.views.handler500'
+handler505 = 'blog.views.handler500'
 
 urlpatterns = [
     path('', views.index, name="index"),
