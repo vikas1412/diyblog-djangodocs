@@ -14,7 +14,6 @@
     <ul class="list-group list-group-flush">
         <li class="p-2 list-group-item">
             <p>{{ blog.content|linebreaks }}</p>
-    {{ blog.author }}: : {{ request.user }}sdf
         </li>
     </ul>
     {% if blog.author == request.user %}
