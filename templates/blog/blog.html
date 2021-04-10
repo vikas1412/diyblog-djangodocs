@@ -10,7 +10,7 @@
 
     </h5>
     {% if blog.author == request.user %}
-            <a href="{% url 'update-post' blog.pk %}" style="float: right" class="btn btn-warning pb-0 pt-0">Update post</a>
+        <a href="{% url 'update-post' blog.pk %}" style="float: right" class="btn btn-warning pb-0 pt-0">Update post</a>
     {% endif %}
 
     <hr>
@@ -46,22 +46,25 @@
     <div class="mt-5">
 
         {% for comment in comments %}
-            <span style="padding: 1%; color: blue; border: 1px solid gray">{{ comment.username }}</span> <br>
-            <p>{{ comment }}</p>
-            <span style="font-size:13px; color: darkgrey; float:right">{{ comment.timestamp|naturaltime }}
-                {% if comment.username == request.user %}
-                    <button style="border: 0px; background-color: white" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+
+            <div class="alert alert-secondary" role="alert">
+                <img width="40px" height="40px" style="object-fit: cover; border-radius: 60px"
+                     src="https://media.istockphoto.com/photos/silhouette-of-a-businessman-for-use-as-a-profile-picture-picture-id474001632?s=612x612">
+                <span style="padding: 1%; color: blue; border: 1px solid gray">{{ comment.username }}</span> <br>
+                <p class="pl-3 pt-3">{{ comment }}</p>
+                <span style="font-size:13px; color: darkgrey; float:right">{{ comment.timestamp|naturaltime }}
+                    {% if comment.username == request.user %}
+                        <button class="btn btn-warning pb-0 pt-0" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
                 <u style="font-size: 13px">Options</u>
             </button>
-                    <ul class="dropdown-menu">
+                        <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{% url 'delete-comment' comment.pk %}">Delete</a></li>
                 <li><a class="dropdown-item" href="{% url 'update-comment' comment.pk %}">Update Comment</a></li>
             </ul>
-                {% endif %}
+                    {% endif %}
             </span>
-            <br>
-            <hr>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
