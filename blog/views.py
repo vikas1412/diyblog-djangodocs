@@ -21,6 +21,30 @@ def index(request):
     return render(request, 'blog/index.html', params)
 
 
+class NewBlogCreateView(generic.CreateView):
+    model = Blog
+    template_name = "blog/create_new_post.html"
+    success_url = '/'
+    fields = ['title', 'content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        try:
+            author_object = Author.objects.get(username=self.request.user)
+            form.instance.user = author_object
+        except Author.DoesNotExist:
+            author_object = None
+
+        if author_object is None:
+            user = self.request.user
+            author_new_object = Author(first_name=user, last_name='', bio='Not updated', username=self.request.user)
+            author_new_object.save()
+            form.instance.user = Author.objects.get(username=user)
+
+        form.save()
+        return super(NewBlogCreateView, self).form_valid(form)
+
+
 class BlogListView(generic.ListView):
     model = Blog
     template_name = 'blog/blogs.html'
