@@ -60,7 +60,7 @@ class BlogDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(BlogDetailView, self).get_context_data(**kwargs)
         blog_obj = self.kwargs['pk']
-        context['comments'] = Comment.objects.order_by('-timestamp')
+        context['comments'] = Comment.objects.filter(blog=blog_obj).order_by('-timestamp')
         return context
 
 
