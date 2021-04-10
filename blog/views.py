@@ -123,21 +123,21 @@ class CommentDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_message = "Deleted Successfully"
     model = Comment
     template_name = 'blog/comment_confirm_delete.html'
-    context_object_name = 'delete_blog'
+    context_object_name = 'delete_comment'
     success_url = reverse_lazy('index')
 
 
 class UpdateCommentUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Comment
     template_name = 'blog/update_comment_form.html'
-
+    context_object_name = 'update_comment'
     fields = ['comment']
 
 
 class UpdatePostUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Blog
     template_name = 'blog/update_post_form.html'
-
+    context_object_name = 'update_blog'
     fields = ['title', 'content']
 
 
