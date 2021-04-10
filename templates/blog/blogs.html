@@ -5,6 +5,9 @@
     <h1>Welcome to TimeBlog.</h1>
 
     <p class="vLargeTextField">These are all blog posts created till date.</p>
+        <a href="{% url 'new-blog' %}" class="btn btn-success pt-0 pb-0" style="float:right;">New blog</a>
+    <strong>Create a blog today!</strong>
+
     {% block pagination %}
         {% if is_paginated %}
             <nav class="mt-3" aria-label="Page navigation example">
