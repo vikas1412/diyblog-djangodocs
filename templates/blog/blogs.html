@@ -46,7 +46,8 @@
         {% for blog in blogs %}
             <li class="p-2 list-group-item">
                 <a href="{% url 'blog' blog.id %}"> {{ blog.title }}</a>
-                <p style="font-size: 15px">{{ blog.timestamp|naturaltime }}</p>
+                <p style="font-size: 15px">{{ blog.timestamp|naturaltime }} - <i style="color: darkgrey"> {{ blog.comment_set.count }} Comments</i>
+                </p>
                 <a href="{% url 'author' blog.author.id %}" style="font-size: 15px; float:right"><span
                         style="color: gray">By:</span> {{ blog.author }}</a>
             </li>
