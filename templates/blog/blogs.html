@@ -47,7 +47,7 @@
             <li class="p-2 list-group-item">
                 <a href="{% url 'blog' blog.author_id %}"> {{ blog.title }}</a>
                 <p style="font-size: 15px">{{ blog.timestamp|naturaltime }}</p>
-                <a href="{% url 'author' blog.author.id %}" style="font-size: 15px; float:right"><span
+                <a href="{% url 'author' blog.user.id %}" style="font-size: 15px; float:right"><span
                         style="color: gray">By:</span> {{ blog.author }}</a>
             </li>
         {% endfor %}
