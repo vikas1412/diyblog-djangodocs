@@ -15,8 +15,10 @@ from blog.models import Blog, Author, Comment
 
 def index(request):
     blogs = Blog.objects.count()
+    author = Author.objects.count()
     params = {
         'blogs': blogs,
+        'authors': author,
     }
     return render(request, 'blog/index.html', params)
 
@@ -97,6 +99,7 @@ class AuthorCreate(LoginRequiredMixin, generic.CreateView):
     model = Author
     fields = ['first_name', 'last_name', 'bio', 'date_of_birth']
     template_name = 'blog/author_form.html'
+    context_object_name = 'new_author'
     initial = {'date_of_birth': '01/01/1990'}
 
 
