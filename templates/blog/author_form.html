@@ -16,18 +16,24 @@
 {% endblock %}
 {% block body %}
 
-    <h5 class="vLargeTextField">Create a new author at TimeBlog
-    </h5>
-    <hr>
-    <div class="mt-3"></div>
+    {% if new_author.username.is_staff %}
+        <h5 class="vLargeTextField">Create a new author at TimeBlog
+        </h5>
+        <hr>
+        <div class="mt-3"></div>
 
-    <form action="#" method="post">
-        {% csrf_token %}
-        <ul class="list-group list-group-flush">
-            {{ form.as_table }}
-            <input type="submit" value="Create new author👶" class="btn btn-primary mt-1">
-        </ul>
-    </form>
+        <form action="#" method="post">
+            {% csrf_token %}
+            <ul class="list-group list-group-flush">
+                {{ form.as_table }}
+                <input type="submit" value="Create new author👶" class="btn btn-primary mt-1">
+            </ul>
+        </form>
+    {% else %}
+        <div class="mt-3"></div>
+        <h4>Cannot create a new author, don't know why?</h4>
+        <p>New authors can only be created by staff members.</p>
+    {% endif %}
     <br>
     <br>
     <br>
