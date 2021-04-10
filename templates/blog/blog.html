@@ -9,6 +9,8 @@
         <span style="color: gray; font-size: 15px; float:right">{{ blog.timestamp|naturaltime }}</span> <br>
 
     </h5>
+    <a href="{% url 'update-post' blog.pk %}" style="float: right" class="btn btn-warning pb-0 pt-0">Update post</a>
+
     <hr>
     <div class="mt-3"></div>
     <ul class="list-group list-group-flush">
@@ -17,7 +19,6 @@
         </li>
     </ul>
     {% if blog.author == request.user %}
-    <a href="{% url 'update-post' blog.pk %}" style="float: right">Update post</a>
     {% endif %}
     <hr>
     <p>
