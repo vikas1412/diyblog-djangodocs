@@ -23,7 +23,7 @@ def index(request):
     return render(request, 'blog/index.html', params)
 
 
-class NewBlogCreateView(generic.CreateView):
+class NewBlogCreateView(LoginRequiredMixin, generic.CreateView):
     model = Blog
     template_name = "blog/create_new_post.html"
     success_url = '/'
