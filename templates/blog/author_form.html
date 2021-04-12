@@ -16,7 +16,7 @@
 {% endblock %}
 {% block body %}
 
-    {% if new_author.username.is_staff %}
+    {% if request.user.is_staff %}
         <h5 class="vLargeTextField">Create a new author at TimeBlog
         </h5>
         <hr>
