@@ -12,6 +12,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', RedirectView.as_view(url="blogs/", permanent=True)),
 
-    path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+    # path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
