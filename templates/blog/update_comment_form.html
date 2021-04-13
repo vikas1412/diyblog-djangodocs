@@ -16,7 +16,6 @@
 {% endblock %}
 {% block body %}
 
-    {% if update_comment.username == request.user %}
     <h5 class="vLargeTextField">Update your comment at TimeBlog
     </h5>
     <hr>
@@ -29,11 +28,8 @@
             <input type="submit" value="Update post👶" class="btn btn-primary mt-1">
         </ul>
     </form>
-    {% else %}
-            <div class="mt-4"></div>
-        <h1>Unable to update comment, don't know why?</h1>
-    <h5>Sorry, you cannot delete someone else's comment. If you think this comment is inappropriate, please call admin.</h5>
-    {% endif %}
+    <div class="mt-4"></div>
+
     <br>
     <br>
     <br>

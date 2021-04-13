@@ -15,26 +15,20 @@
 
 {% endblock %}
 {% block body %}
+    <h5 class="vLargeTextField">Update your blog at TimeBlog
+    </h5>
+    <hr>
+    <div class="mt-3"></div>
 
-    {% if update_blog.author == request.user %}
-        <h5 class="vLargeTextField">Update your blog at TimeBlog
-        </h5>
-        <hr>
-        <div class="mt-3"></div>
+    <form action="#" method="post">
+        {% csrf_token %}
+        <ul class="list-group list-group-flush">
+            {{ form.as_table }}
+            <input type="submit" value="Update post👶" class="btn btn-primary mt-1">
+        </ul>
+    </form>
+    <div class="mt-3"></div>
 
-        <form action="#" method="post">
-            {% csrf_token %}
-            <ul class="list-group list-group-flush">
-                {{ form.as_table }}
-                <input type="submit" value="Update post👶" class="btn btn-primary mt-1">
-            </ul>
-        </form>
-    {% else %}
-        <div class="mt-3"></div>
-
-        <h1>Cannot update post, don't know why?</h1>
-        <p>You cannot update a blog post written by someone else. Please ask author to take appropriate actions.</p>
-    {% endif %}
     <br>
     <br>
     <br>
