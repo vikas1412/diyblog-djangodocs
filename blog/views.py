@@ -1,9 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import authenticate, login as login_auth, logout as logout_auth
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -102,6 +102,15 @@ class AuthorCreate(LoginRequiredMixin, generic.CreateView):
     context_object_name = 'new_author'
     initial = {'date_of_birth': '01/01/1990'}
 
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if not self.request.user.is_staff:
+            return render(request, 'blog/unauthorized.html')
+        return super(AuthorCreate, self).dispatch(request, *args, **kwargs)
+
+    def test_func(self):
+        return self.test_func
+
 
 def signup(request):
     if request.method == 'POST':
@@ -122,27 +131,53 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
-class CommentDeleteView(LoginRequiredMixin, generic.DeleteView):
+class CommentDeleteView(UserPassesTestMixin, LoginRequiredMixin, generic.DeleteView):
     success_message = "Deleted Successfully"
     model = Comment
     template_name = 'blog/comment_confirm_delete.html'
     context_object_name = 'delete_comment'
     success_url = reverse_lazy('index')
 
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.username != self.request.user:
+            return render(request, 'blog/unauthorized.html')
+        return super(CommentDeleteView, self).dispatch(request, *args, **kwargs)
 
-class UpdateCommentUpdateView(LoginRequiredMixin, generic.UpdateView):
+    def test_func(self):
+        return self.test_func
+
+
+class UpdateCommentUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateView):
     model = Comment
     template_name = 'blog/update_comment_form.html'
     context_object_name = 'update_comment'
     fields = ['comment']
 
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.username != self.request.user:
+            return render(request, 'blog/unauthorized.html')
+        return super(UpdatePostUpdateView, self).dispatch(request, *args, **kwargs)
 
-class UpdatePostUpdateView(LoginRequiredMixin, generic.UpdateView):
+    def test_func(self):
+        return self.test_func
+
+
+class UpdatePostUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateView):
     model = Blog
     template_name = 'blog/update_post_form.html'
     context_object_name = 'update_blog'
     fields = ['title', 'content']
 
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.author != self.request.user:
+            return render(request, 'blog/unauthorized.html')
+        return super(UpdatePostUpdateView, self).dispatch(request, *args, **kwargs)
+
+    def test_func(self):
+        return self.test_func
 
 def handler404(request, exception):
     return render(request, 'blog/pnf.html', {'exception': exception})
